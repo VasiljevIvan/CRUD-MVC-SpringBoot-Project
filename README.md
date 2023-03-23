@@ -8,4 +8,4 @@
 ### При раpработке был использован следующий стек технологий:<br>
 Spring Boot, Hibernate, Spring Data JPA, H2 Database, Thymeleaf<br>
 ### Для запуска:<br>
-`./mvnw spring-boot:run`
+`mvn spring-boot:run`
