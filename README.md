@@ -6,4 +6,6 @@
 -Пользователь может просрочить возврат книги<br>
 -Реализована пагинация, сортировка и поиск по названию<br>
 ### При раpработке был использован следующий стек технологий:<br>
-Spring Boot, Hibernate, Spring Data JPA, Thymeleaf, PostgreSQL
+Spring Boot, Hibernate, Spring Data JPA, H2 Database, Thymeleaf<br>
+### Для запуска:<br>
+`./mvnw spring-boot:run`
