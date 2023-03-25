@@ -1,6 +1,9 @@
 package ru.vasiljev.springcourse.project2springboot.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,12 +15,16 @@ public class Book {
     private int id;
 
     @Column(name = "name")
+    @NotEmpty(message = "Название не должно быть не пустым")
+    @Size(min = 2, max = 50, message = "Название должно содержать от 2 до 50 символов")
     private String name;
 
     @Column(name = "author")
+    @NotEmpty(message = "Поле автор не должно быть не пустым")
     private String author;
 
     @Column(name = "year")
+    @Min(value = -1, message = "Год выпуска должен быть больше 0")
     private int year;
 
     @ManyToOne

@@ -5,6 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import ru.vasiljev.springcourse.project2springboot.models.Book;
 import ru.vasiljev.springcourse.project2springboot.models.Person;
 import ru.vasiljev.springcourse.project2springboot.repositories.BooksRepository;
@@ -23,20 +24,15 @@ public class BooksService {
         this.booksRepository = booksRepository;
     }
 
-    public List<Book> findAll() {
-        return booksRepository.findAll();
-    }
-
-    public List<Book> findAll(boolean isSortedByYear) {
-        return booksRepository.findAll(Sort.by("year"));
-    }
-
-    public List<Book> findAll(String page, String itemsPerPage) {
-        return booksRepository.findAll(PageRequest.of(Integer.parseInt(page), Integer.parseInt(itemsPerPage))).getContent();
-    }
-
-    public List<Book> findAll(String page, String itemsPerPage, boolean isSortedByYear) {
-        return booksRepository.findAll(PageRequest.of(Integer.parseInt(page), Integer.parseInt(itemsPerPage), Sort.by("year"))).getContent();
+    public List<Book> findAll(String page, String itemsPerPage, String isSortedByYear) {
+        if (page != null && itemsPerPage != null && isSortedByYear != null && isSortedByYear.equalsIgnoreCase("true"))
+            return booksRepository.findAll(PageRequest.of(Integer.parseInt(page), Integer.parseInt(itemsPerPage), Sort.by("year"))).getContent();
+        else if (page != null && itemsPerPage != null)
+            return booksRepository.findAll(PageRequest.of(Integer.parseInt(page), Integer.parseInt(itemsPerPage))).getContent();
+        else if (isSortedByYear != null && isSortedByYear.equalsIgnoreCase("true"))
+            return booksRepository.findAll(Sort.by("year"));
+        else
+            return booksRepository.findAll();
     }
 
     public Book findById(int id) {
